@@ -35,7 +35,6 @@ public class GithubClient {
             throw new GitHubOrgNotFoundException(org);
         }
     }
-
     public List<Map<String, Object>> getRepoCollaborators(String org, String repo, String token, int page, int perPage) {
 
         HttpHeaders headers = new HttpHeaders();

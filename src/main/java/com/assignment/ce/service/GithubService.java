@@ -73,7 +73,7 @@ public class GithubService {
                 collaborators = githubClient.getRepoCollaborators(org, repo, token, page, 100);
                 allCollaborators.addAll(collaborators);
                 page++;
-            } while (!collaborators.isEmpty());
+            } while (!collaborators.isEmpty() && collaborators.size() == 100);
 
             if (collaborators != null) {
                 for (Map<String, Object> user : collaborators) {
