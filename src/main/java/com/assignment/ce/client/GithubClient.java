@@ -36,7 +36,7 @@ public class GithubClient {
         }
     }
 
-    public List<Map<String, Object>> getRepoCollaborators(String org, String repo, String token) {
+    public List<Map<String, Object>> getRepoCollaborators(String org, String repo, String token, int page, int perPage) {
 
         HttpHeaders headers = new HttpHeaders();
         headers.setBearerAuth(token);
@@ -45,7 +45,7 @@ public class GithubClient {
         try {
             ResponseEntity<List> response =
                     restTemplate.exchange(
-                            "https://api.github.com/repos/" + org + "/" + repo + "/collaborators",
+                            "https://api.github.com/repos/" + org + "/" + repo + "/collaborators?per_page=" + perPage + "&page=" + page,
                             HttpMethod.GET,
                             entity,
                             List.class);

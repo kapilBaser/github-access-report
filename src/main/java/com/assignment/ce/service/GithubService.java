@@ -65,7 +65,15 @@ public class GithubService {
     public CompletableFuture<Void> fetchCollaborators(String org, String repo, String token,
                                                       Map<String, List<String>> map) {
         try {
-            List<Map<String, Object>> collaborators = githubClient.getRepoCollaborators(org, repo, token);
+            int page = 1;
+            List<Map<String, Object>> allCollaborators = new ArrayList<>();
+            List<Map<String, Object>> collaborators;
+
+            do {
+                collaborators = githubClient.getRepoCollaborators(org, repo, token, page, 100);
+                allCollaborators.addAll(collaborators);
+                page++;
+            } while (!collaborators.isEmpty());
 
             if (collaborators != null) {
                 for (Map<String, Object> user : collaborators) {
